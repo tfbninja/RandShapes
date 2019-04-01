@@ -4,8 +4,8 @@ package randshapes;
  *
  * @author Tim Barber
  */
-public class Canvas {
-
+public class Shape {
+    
 }
 
 /*

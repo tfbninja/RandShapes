@@ -1,43 +1,60 @@
 package randshapes;
 
-import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
+import java.awt.Toolkit;
+import java.awt.datatransfer.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.util.Pair;
+import javax.swing.JFrame;
 
 /**
  *
- * @author Tim Barber & Elliot McCormick
+ * @author Tim Barber
  */
-public class RandShapes extends Application {
-    
-    private ArrayList<Shape> shapes;
+public class Screen {
 
-    @Override
-    public void start(Stage primaryStage) {
-        
+    private Canvas c;
+    private double width;
+    private double height;
 
-        StackPane root = new StackPane();
-        root.getChildren().add();
-
-        Scene scene = new Scene(root, 300, 250);
-
-        primaryStage.setTitle("Shapes");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+    public Screen(double width, double height) {
+        this.width = width;
+        this.height = height;
     }
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        launch(args);
+    public Canvas getC() {
+        return c;
     }
 
+    public void setC(Canvas c) {
+        this.c = c;
+    }
+
+    public double getWidth() {
+        return width;
+    }
+
+    public void setWidth(double width) {
+        this.width = width;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public void setHeight(double height) {
+        this.height = height;
+    }
 }
+
 /*
  * The MIT License
  *
