@@ -28,6 +28,7 @@ public class Screen {
     public Screen(double width, double height) {
         this.width = width;
         this.height = height;
+        c = new Canvas(width, height);
     }
 
     public Canvas getC() {
