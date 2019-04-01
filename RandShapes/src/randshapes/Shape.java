@@ -1,11 +1,31 @@
 package randshapes;
 
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+
 /**
  *
  * @author Tim Barber
  */
 public class Shape {
+
+    private double x;
+    private double y;
+    private double w;
+    private double h;
+    public static int STAR = 0;
+    public static int RECT = 1;
+    public static int TRI = 2;
     
+
+    public void draw(Canvas c) {
+        GraphicsContext gc = c.getGraphicsContext2D();
+    }
+    
+    public void rotate(Canvas c, double degrees){
+        GraphicsContext gc = c.getGraphicsContext2D();
+        gc.rotate(Math.toRadians(degrees));
+    }
 }
 
 /*

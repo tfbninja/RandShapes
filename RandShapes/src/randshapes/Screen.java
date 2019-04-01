@@ -54,6 +54,12 @@ public class Screen {
     public void setHeight(double height) {
         this.height = height;
     }
+
+    public void draw(ArrayList<Shape> shapes) {
+        for (Shape s : shapes) {
+            s.draw(c);
+        }
+    }
 }
 
 /*

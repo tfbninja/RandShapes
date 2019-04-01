@@ -1,6 +1,7 @@
 package randshapes;
 
 import javafx.application.Application;
+import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -15,13 +16,14 @@ import javafx.stage.Stage;
 public class RandShapes extends Application {
     
     private ArrayList<Shape> shapes;
+    private Screen screen;
 
     @Override
     public void start(Stage primaryStage) {
         
 
         StackPane root = new StackPane();
-        root.getChildren().add();
+        root.getChildren().add(screen.getCanvas());
 
         Scene scene = new Scene(root, 300, 250);
 
