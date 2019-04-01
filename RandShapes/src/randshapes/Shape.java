@@ -8,23 +8,60 @@ import javafx.scene.canvas.GraphicsContext;
  * @author Tim Barber
  */
 public class Shape {
-
+    
     private double x;
     private double y;
     private double w;
     private double h;
-    public static int STAR = 0;
-    public static int RECT = 1;
-    public static int TRI = 2;
+    private double r;
+    private int t; // type
+    public static final int STAR = 0;
+    public static final int RECT = 1;
+    public static final int TRI = 2;
     
-
-    public void draw(Canvas c) {
-        GraphicsContext gc = c.getGraphicsContext2D();
+    public Shape(double x, double y, double w, double h, int type) {
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h;
+        this.t = type;
+        this.r = 0;
     }
     
-    public void rotate(Canvas c, double degrees){
+    public Shape(double x, double y, double w, double h, double r, int type) {
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h;
+        this.t = type;
+        this.r = r;
+    }
+    
+    public void draw(Canvas c) {
         GraphicsContext gc = c.getGraphicsContext2D();
-        gc.rotate(Math.toRadians(degrees));
+        gc.rotate(r);
+        switch (t) {
+            case STAR:
+                double[] xPs = {10};
+                double[] yPs = {};
+                gc.strokePolygon(xPoints, yPoints, t);
+                break;
+            case RECT:
+                gc.strokeRect(x, y, w, h);
+                break;
+            case TRI:
+                double[] xPs = {};
+                double[] yPs = {};
+                gc.strokePolygon(xPoints, yPoints, t);
+                break;
+            default:
+                break;
+        }
+        gc.rotate(-r);
+    }
+    
+    public void rotate(double degrees) {
+        r = degrees;
     }
 }
 
