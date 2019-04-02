@@ -18,6 +18,8 @@ import javafx.stage.Stage;
 public class RandShapes extends Application {
 
     private ArrayList<Shape> shapes;
+    public static final double SWIDTH = 800;
+    public static final double SHEIGHT = 600;
     private Screen screen;
     private double maxSize = 100;
     private boolean rotating = false;
@@ -25,13 +27,13 @@ public class RandShapes extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        screen = new Screen(800, 600);
+        screen = new Screen(SWIDTH, SHEIGHT);
         shapes = new ArrayList<>();
         StackPane root = new StackPane();
         screen.draw(shapes);
         root.getChildren().add(screen.getCanvas());
 
-        Scene scene = new Scene(root, 800, 600);
+        Scene scene = new Scene(root, SWIDTH, SHEIGHT);
 
         primaryStage.setTitle("Shapes");
         primaryStage.setScene(scene);

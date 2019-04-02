@@ -65,29 +65,53 @@ public class Shape {
                 if (color == null) {
                     gc.setStroke(Color.YELLOW);
                 }
-                double[] starXPs = {};
-                double[] starYPs = {};
-                gc.strokePolygon(starXPs, starYPs, 4);
+                double[] starXPs = {x, x + 10, x + 20};
+                double[] starYPs = {y, y - 10, y + 20};
+                gc.strokePolygon(rotateXList(starXPs, starYPs, theta), rotateYList(starXPs, starYPs, theta), 3);
                 break;
             case RECT:
                 if (color == null) {
                     gc.setStroke(Color.DODGERBLUE);
                 }
-                double[] rectXPs = {};
-                double[] rectYPs = {};
-                gc.strokePolygon(rectXPs, rectYPs, 4);
+                double[] rectXPs = {x, x + 10, x + 20};
+                double[] rectYPs = {y, y - 10, y + 20};
+                gc.strokePolygon(rotateXList(rectXPs, rectYPs, theta), rotateYList(rectXPs, rectYPs, theta), 3);
                 break;
             case TRI:
                 if (color == null) {
                     gc.setStroke(Color.ORANGERED);
                 }
-                double[] triXPs = {x + r * Math.cos(theta), x + r * Math.cos(theta) + r / 2, x + r * Math.cos(theta) + r};
-                double[] triYPs = {y + r * Math.sin(theta) + r, y + r * Math.sin(theta), y + r * Math.sin(theta) + r};
-                gc.strokePolygon(triXPs, triYPs, 3);
+                double[] triXPs = {x, x + r / 2, x + r};
+                double[] triYPs = {y + r, y, y + r};
+                gc.strokePolygon(rotateXList(triXPs, triYPs, theta), rotateYList(triXPs, triYPs, theta), 3);
                 break;
             default:
                 break;
         }
+    }
+    
+    public static double[] rotateXList(double[] xList, double[] yList, double theta) {
+        double[] out = new double[xList.length];
+        for (int i = 0; i < xList.length; i++) {
+            out[i] = xList[i] + rotateX(RandShapes.SWIDTH / 2, RandShapes.SHEIGHT / 2, theta);
+        }
+        return out;
+    }
+    
+    public static double[] rotateYList(double[] xList, double[] yList, double theta) {
+        double[] out = new double[yList.length];
+        for (int i = 0; i < yList.length; i++) {
+            out[i] = yList[i] + rotateY(RandShapes.SWIDTH / 2, RandShapes.SHEIGHT / 2, theta);
+        }
+        return out;
+    }
+
+    public static double rotateX(double x, double y, double theta) {
+        return x * Math.cos(Math.toRadians(theta)) - y * Math.sin(Math.toRadians(theta));
+    }
+
+    public static double rotateY(double x, double y, double theta) {
+        return x * Math.sin(Math.toRadians(theta)) + y * Math.cos(Math.toRadians(theta));
     }
 
     public void rotate(double degrees) {
