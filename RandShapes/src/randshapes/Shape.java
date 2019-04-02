@@ -2,89 +2,106 @@ package randshapes;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 /**
  *
- * @author Tim Barber
+ * @author Tim Barber & Elliot McCormick
  */
 public class Shape {
-    
+
     private double x;
     private double y;
-    private double w;
-    private double h;
+    private double theta;
     private double r;
     private int t; // type
+    private Color color;
     public static final int STAR = 0;
     public static final int RECT = 1;
     public static final int TRI = 2;
-    
-    public Shape(double x, double y, double w, double h, int type) {
+    public static final int NUMSHAPETYPES = 3;
+
+    public Shape(double x, double y, double r, int type) {
         this.x = x;
         this.y = y;
-        this.w = w;
-        this.h = h;
         this.t = type;
-        this.r = 0;
-    }
-    
-    public Shape(double x, double y, double w, double h, double r, int type) {
-        this.x = x;
-        this.y = y;
-        this.w = w;
-        this.h = h;
-        this.t = type;
+        this.theta = 0;
         this.r = r;
     }
-    
+
+    public Shape(double x, double y, double r, int type, Color c) {
+        this.x = x;
+        this.y = y;
+        this.t = type;
+        this.theta = 0;
+        this.r = r;
+        this.color = c;
+    }
+
+    public double[] scaleList(double[] list, double scalar) {
+        double[] copy = new double[list.length];
+        for (int i = 0; i < list.length; i++) {
+            copy[i] = list[i] * scalar;
+        }
+        return copy;
+    }
+
+    public double[] incrementList(double[] list, double increment) {
+        double[] copy = new double[list.length];
+        for (int i = 0; i < list.length; i++) {
+            copy[i] = list[i] + increment;
+        }
+        return copy;
+    }
+
     public void draw(Canvas c) {
         GraphicsContext gc = c.getGraphicsContext2D();
-        gc.rotate(r);
+
+        if (color != null) {
+            gc.setStroke(color);
+        }
         switch (t) {
             case STAR:
-                double[] xPs = {10};
-                double[] yPs = {};
-                gc.strokePolygon(xPoints, yPoints, t);
+                if (color == null) {
+                    gc.setStroke(Color.YELLOW);
+                }
+                double[] starXPs = {};
+                double[] starYPs = {};
+                gc.strokePolygon(starXPs, starYPs, 4);
                 break;
             case RECT:
-                gc.strokeRect(x, y, w, h);
+                if (color == null) {
+                    gc.setStroke(Color.DODGERBLUE);
+                }
+                double[] rectXPs = {};
+                double[] rectYPs = {};
+                gc.strokePolygon(rectXPs, rectYPs, 4);
                 break;
             case TRI:
-                double[] xPs = {};
-                double[] yPs = {};
-                gc.strokePolygon(xPoints, yPoints, t);
+                if (color == null) {
+                    gc.setStroke(Color.ORANGERED);
+                }
+                double[] triXPs = {x + r * Math.cos(theta), x + r * Math.cos(theta) + r / 2, x + r * Math.cos(theta) + r};
+                double[] triYPs = {y + r * Math.sin(theta) + r, y + r * Math.sin(theta), y + r * Math.sin(theta) + r};
+                gc.strokePolygon(triXPs, triYPs, 3);
                 break;
             default:
                 break;
         }
-        gc.rotate(-r);
     }
-    
+
     public void rotate(double degrees) {
-        r = degrees;
+        theta += degrees;
+        if (theta % 360 == 0) {
+            theta = 0;
+        }
+    }
+
+    public void setColor(Color c) {
+        color = c;
+    }
+
+    public Color getColor() {
+        return color;
     }
 }
-
-/*
- * The MIT License
- *
- * Copyright (c) 2019 Tim Barber.
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
