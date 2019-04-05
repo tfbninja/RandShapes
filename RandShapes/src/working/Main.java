@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package working;
 
 /**
@@ -5,15 +10,10 @@ package working;
  * @author elliot and tim barber
  */
 /*
- * This is another exercise in ArrayLists and an example of inheritance and
- * polymorphism.
- * Please add an ArrayList instance variable that will hold all of the shapes
- * you will display on the screen.
- * In the handle method at the bottom of this class, please go through all of
- * the shapes in the Arraylist and draw them and if rotating is on, rotate them
- * on the screen.
- * (you can call the rotate method in the shape class and pass in the following
- * value as a parameter - Math.PI / 120)
+ * This is another exercise in ArrayLists and an example of inheritance and polymorphism.
+ * Please add an ArrayList instance variable that will hold all of the shapes you will display on the screen.
+ * In the handle method at the bottom of this class, please go through all of the shapes in the Arraylist and draw them and if rotating is on, rotate them on the screen.
+ * (you can call the rotate method in the shape class and pass in the following value as a parameter - Math.PI / 120)
  */
 import java.util.ArrayList;
 import java.util.List;
@@ -36,12 +36,12 @@ public class Main extends Application {
     private Canvas canvas;
     private RotationTimer timer;
     private ArrayList<Shape> shapes;
-
+    
     private boolean rotating;
 
     @Override
     public void start(Stage primaryStage) {
-        shapes = new ArrayList<>();
+        shapes = new ArrayList();
         canvas = new Canvas(WIDTH, HEIGHT);
         canvas.getGraphicsContext2D().setLineWidth(5);
         timer = new RotationTimer();
@@ -95,14 +95,14 @@ public class Main extends Application {
     }
 
     private Shape getRandomShape() {
-        int random = (int) (Math.random() * 3);
+        int random = (int)(Math.random() * 3);
         int maxSize = 80;
-        if (random == 0) {
+        if (random == 0){
             return new Triangle(Math.random() * WIDTH, Math.random() * HEIGHT, Math.random() * maxSize);
-        } else if (random == 1) {
+        } else if (random == 1){
             return new Rectangle(Math.random() * WIDTH, Math.random() * HEIGHT, Math.random() * maxSize, Math.random() * maxSize);
         } else {
-            return new Star(Math.random() * WIDTH, Math.random() * HEIGHT, Math.random() * maxSize / 2);
+            return new Star(Math.random() * WIDTH, Math.random() * HEIGHT, Math.random() * maxSize/2);
         }
     }
 
@@ -119,24 +119,22 @@ public class Main extends Application {
     }
 
     public void removeTriangles() {
-        for (int i = shapes.size() - 1; i >= 0; i--) {
-            if (shapes.get(i) instanceof Triangle) {
+        for (int i = shapes.size() - 1; i >= 0; i--){
+            if (shapes.get(i) instanceof Triangle){
                 shapes.remove(i);
             }
         }
     }
-
     public void removeRectangles() {
-        for (int i = shapes.size() - 1; i >= 0; i--) {
-            if (shapes.get(i) instanceof Rectangle) {
+        for (int i = shapes.size() - 1; i >= 0; i--){
+            if (shapes.get(i) instanceof Rectangle){
                 shapes.remove(i);
             }
         }
     }
-
     public void removeStars() {
-        for (int i = shapes.size() - 1; i >= 0; i--) {
-            if (shapes.get(i) instanceof Star) {
+        for (int i = shapes.size() - 1; i >= 0; i--){
+            if (shapes.get(i) instanceof Star){
                 shapes.remove(i);
             }
         }
@@ -157,11 +155,11 @@ public class Main extends Application {
         public void handle(long now) {
             canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
             // draw and rotate all shape objects
-            for (Shape shape : shapes) {
+            for (Shape shape : shapes){
                 shape.draw(canvas);
             }
-            if (rotating) {
-                for (Shape shape : shapes) {
+            if (rotating){
+                for (Shape shape : shapes){
                     shape.rotate(Math.PI / 120);
                 }
             }
